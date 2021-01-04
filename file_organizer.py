@@ -3,13 +3,14 @@ import shutil
 import time
 
 
-DOWNLOAD_PATH = "C:\\Users\\Hazdan\\Downloads\\"
+DOWNLOAD_PATH = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Downloads')
+
 
 extension = {
-    'video': ['.mov', '.mp4'],
+    'video': ['.mov', '.mp4', '.MKV', '.avi', '.mpeg', '.webm'],
     'document': ['.doc', '.docx', '.txt', '.pdf', '.pptx', '.csv', '.epub'],
-    'photo': ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.PNG'],
-    'audio': ['.mp3'],
+    'photo': ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp'],
+    'audio': ['.mp3', '.wav', '.ogg', '.MIDI'],
 }
 
 
@@ -22,7 +23,7 @@ def search_extension(file_extension):
 
 
 def sort_file(file, path):
-    shutil.move(DOWNLOAD_PATH + file, path)
+    shutil.move(os.path.join(DOWNLOAD_PATH, file), path)
 
 
 def main():
@@ -30,7 +31,7 @@ def main():
         file_name, file_extension = os.path.splitext(file)
         if file_extension != '':
             file_type = search_extension(file_extension)
-            path = DOWNLOAD_PATH + file_type
+            path = os.path.join(DOWNLOAD_PATH, file_type)
             sort_file(file, path)
 
 
